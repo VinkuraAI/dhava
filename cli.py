@@ -1,4 +1,4 @@
-"""Command Line Interface (CLI) for DDIL Sync Engine."""
+"""Command Line Interface (CLI) for Dhava DDIL Sync Engine."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from models import Priority
 from transport import HTTPTransport
 
 app = typer.Typer(
-    name="ddil-sync",
+    name="dhava",
     help="Offline-First Sync Engine CLI for Denied, Disrupted, Intermittent, and Limited environments.",
     add_completion=False,
 )
@@ -28,11 +28,23 @@ console = Console()
 
 
 def get_default_key_path() -> Path:
-    return Path.home() / ".ddil-sync" / "node_key.bin"
+    dhava_path = Path.home() / ".dhava" / "node_key.bin"
+    if dhava_path.exists():
+        return dhava_path
+    legacy_path = Path.home() / ".ddil-sync" / "node_key.bin"
+    if legacy_path.exists():
+        return legacy_path
+    return dhava_path
 
 
 def get_default_db_path() -> Path:
-    return Path.home() / ".ddil-sync" / "store.db"
+    dhava_path = Path.home() / ".dhava" / "store.db"
+    if dhava_path.exists():
+        return dhava_path
+    legacy_path = Path.home() / ".ddil-sync" / "store.db"
+    if legacy_path.exists():
+        return legacy_path
+    return dhava_path
 
 
 def load_or_create_key(key_path: Path | None = None) -> bytes:
@@ -83,7 +95,7 @@ def status(
 ) -> None:
     """Display node status, pending outbox breakdown, and transport metrics."""
     if not db_path.exists():
-        console.print(f"[red]Database not found at {db_path}. Run 'ddil-sync init' first.[/red]")
+        console.print(f"[red]Database not found at {db_path}. Run 'dhava init' first.[/red]")
         raise typer.Exit(code=1)
 
     key = load_or_create_key(key_path)

@@ -1,4 +1,4 @@
-# DDIL Sync Engine (`vinkura/ddil-sync`)
+# Dhava — DDIL Sync Engine (`dhava`)
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
@@ -370,10 +370,10 @@ dhava/
 
 ```bash
 # Install core package
-pip install ddil-sync
+pip install dhava
 
 # Or install with serial/tactical radio support
-pip install ddil-sync[serial]
+pip install dhava[serial]
 ```
 
 ### 2. Basic Edge Node Example
@@ -439,26 +439,26 @@ server.register_node("border-outpost-04", metadata={"region": "Northern Command"
 
 ## 💻 CLI Reference
 
-The CLI provides full control over local database inspection, key generation, and background sync daemons:
+The CLI provides full control over local database inspection, key generation, and background sync daemons (accessible via `dhava` or `ddil-sync`):
 
 ```bash
 # Initialize node keys and local database
-ddil-sync init --node-id outpost-alpha --db ./outpost.db --key ./node_key.bin
+dhava init --node-id outpost-alpha --db ./outpost.db --key ./node_key.bin
 
 # Check live telemetry, pending outbox counts, and active transports
-ddil-sync status --db ./outpost.db --key ./node_key.bin
+dhava status --db ./outpost.db --key ./node_key.bin
 
 # Write a record locally (works offline)
-ddil-sync write patrols p-101 '{"officer": "Rathore", "sector": "Kilo"}' --priority P0
+dhava write patrols p-101 '{"officer": "Rathore", "sector": "Kilo"}' --priority P0
 
 # Query stored collections
-ddil-sync query patrols --filter '{"sector": "Kilo"}'
+dhava query patrols --filter '{"sector": "Kilo"}'
 
 # Execute an immediate sync pass
-ddil-sync sync --url https://hq.internal/sync
+dhava sync --url https://hq.internal/sync
 
 # Run compression and encryption benchmarks
-ddil-sync benchmark --count 100
+dhava benchmark --count 100
 ```
 
 ---

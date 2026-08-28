@@ -1,5 +1,5 @@
 """
-DDIL Sync Engine — Sovereign offline-first data synchronization engine
+Dhava — Sovereign offline-first data synchronization engine
 for Denied, Disrupted, Intermittent, and Limited bandwidth environments.
 """
 

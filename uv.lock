@@ -421,7 +421,7 @@ wheels = [
 ]
 
 [[package]]
-name = "ddil-sync"
+name = "dhava"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
